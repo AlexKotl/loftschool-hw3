@@ -13,6 +13,14 @@ const pug = new Pug({
 const static = require('koa-static');
 app.use(static('./public'));
 
+const koaBody = require('koa-body');
+app.use(koaBody({
+  formidable: {
+    uploadDir: './public/assets/img/products/'
+  },
+  multipart: true
+}));
+
 const router = require('./router');
 app.use(router.routes());
 app.use(router.allowedMethods());
