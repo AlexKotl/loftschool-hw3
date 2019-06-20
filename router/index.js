@@ -20,7 +20,12 @@ router.get('/login', async (ctx) => {
 
 router.get('/admin', async (ctx) => {
   try {
-    ctx.render('admin');
+    const skills = await skillsCtrl.get();
+    ctx.render('admin', {
+      skills
+    });
+    console.log(skills);
+    
   } catch (error) {
     console.error(error);
   }
