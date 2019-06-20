@@ -1,6 +1,7 @@
 const Router = require('koa-router');
 const router = new Router();
 const skillsCtrl = require('../controllers/skills') 
+const productsCtrl = require('../controllers/products') 
 
 router.get('/', async (ctx) => {
   try {
@@ -24,7 +25,6 @@ router.get('/admin', async (ctx) => {
     ctx.render('admin', {
       skills
     });
-    console.log(skills);
     
   } catch (error) {
     console.error(error);
@@ -34,6 +34,15 @@ router.get('/admin', async (ctx) => {
 router.post('/admin/skills', async (ctx) => {
   try {
     await skillsCtrl.set({...ctx.request.body});
+    ctx.redirect('/admin');
+  } catch (error) {
+    console.error(error);
+  }
+});
+
+router.post('/admin/upload', async (ctx) => {
+  try {
+    await productsCtrl.set({...ctx.request.body});
     ctx.redirect('/admin');
   } catch (error) {
     console.error(error);
