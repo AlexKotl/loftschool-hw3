@@ -17,11 +17,18 @@ exports.get = () => new Promise((resolve, reject) => {
   }
 });
 
-exports.set = ({ name, price }) => new Promise((resolve, reject) => {
+exports.add = ({ photo, name, price }) => new Promise((resolve, reject) => {
   try {
-    console.log('saving product', { name, price });
-    
-    db.get('products').push({ name, price }).write();
+    const photoDir = path.join('.', 'public', 'assets', 'img', 'products');
+
+    if (!fs.existsSync(photoDir)) {
+      console.log('creating upload dir');
+      fs.mkdirSync(photoDir);
+    }
+
+    fs.renameSync(photo.path, path.join(photoDir, photo.name));
+
+    db.get('products').push({ name, price, filename: photo.name }).write();
     resolve();
   }
   catch (err) {

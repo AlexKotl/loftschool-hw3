@@ -33,7 +33,7 @@ router.get('/admin', async (ctx) => {
 
 router.post('/admin/skills', async (ctx) => {
   try {
-    await skillsCtrl.set({...ctx.request.body});
+    await skillsCtrl.set({ ...ctx.request.body });
     ctx.redirect('/admin');
   } catch (error) {
     console.error(error);
@@ -42,7 +42,7 @@ router.post('/admin/skills', async (ctx) => {
 
 router.post('/admin/upload', async (ctx) => {
   try {
-    await productsCtrl.set({...ctx.request.body});
+    await productsCtrl.add({ ...ctx.request.body, ...ctx.request.files });
     ctx.redirect('/admin');
   } catch (error) {
     console.error(error);
