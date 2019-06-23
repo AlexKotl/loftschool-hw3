@@ -22,7 +22,8 @@ router.get('/login', async (ctx) => {
     }
 
     ctx.render('login', {
-      message: ctx.flash.get() ? ctx.flash.get().message : null
+      message: ctx.flash.get() ? ctx.flash.get().message : null,
+      message2: ctx.flash.get() ? ctx.flash.get().message2 : null
     });
   } catch (error) {
     console.error(error);
@@ -47,8 +48,10 @@ router.get('/admin', async (ctx) => {
     }
 
     const skills = await skillsCtrl.get();
+    
     ctx.render('admin', {
-      skills
+      skills,
+      message: ctx.flash.get() ? ctx.flash.get().message : null
     });
   } catch (error) {
     console.error(error);
@@ -62,6 +65,7 @@ router.post('/admin/skills', async (ctx) => {
     }
 
     await skillsCtrl.set({ ...ctx.request.body });
+    ctx.flash.set({ message: 'Skills saved' });
     ctx.redirect('/admin');
   } catch (error) {
     console.error(error);
@@ -75,6 +79,7 @@ router.post('/admin/upload', async (ctx) => {
     }
 
     await productsCtrl.add({ ...ctx.request.body, ...ctx.request.files });
+    ctx.flash.set({ message2: 'New product added' });
     ctx.redirect('/admin');
   } catch (error) {
     console.error(error);
