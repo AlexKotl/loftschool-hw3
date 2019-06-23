@@ -7,22 +7,25 @@ const pug = new Pug({
   basedir: './view/pages',
   pretty: true,
   noCache: true,
-  app: app,
+  app: app
 });
 
-const static = require('koa-static');
-app.use(static('./public'));
+const koaStatic = require('koa-static');
+app.use(koaStatic('./public'));
 
 const session = require('koa-session');
 app.use(session({
-    key: 'koa:sess',
-    maxAge: 86400000,
-    overwrite: true,
-    httpOnly: true,
-    signed: false,
-    rolling: false,
-    renew: true
+  key: 'koa:sess',
+  maxAge: 86400000,
+  overwrite: true,
+  httpOnly: true,
+  signed: false,
+  rolling: false,
+  renew: true
 }, app));
+
+const flash = require('connect-flash');
+app.use(flash());
 
 const koaBody = require('koa-body');
 app.use(koaBody({
