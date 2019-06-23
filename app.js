@@ -24,7 +24,7 @@ app.use(session({
   renew: true
 }, app));
 
-const flash = require('connect-flash');
+const flash = require('koa-flash-simple');
 app.use(flash());
 
 const koaBody = require('koa-body');

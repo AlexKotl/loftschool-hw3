@@ -13,6 +13,7 @@
     "connect-flash": "^0.1.1",
     "koa": "^2.7.0",
     "koa-body": "^4.1.0",
+    "koa-flash-simple": "0.0.3",
     "koa-pug": "^3.0.0-2",
     "koa-router": "^7.4.0",
     "koa-session": "^5.12.0",

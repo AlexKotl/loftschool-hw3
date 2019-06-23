@@ -21,7 +21,9 @@ router.get('/login', async (ctx) => {
       ctx.redirect('/admin');
     }
 
-    ctx.render('login');
+    ctx.render('login', {
+      message: ctx.flash.get() ? ctx.flash.get().message : null
+    });
   } catch (error) {
     console.error(error);
   }
@@ -33,7 +35,8 @@ router.post('/login', async (ctx) => {
     ctx.session.isAuth = true;
     ctx.redirect('/admin');
   } catch (error) {
-    console.error(error);
+    ctx.flash.set({message: error.message });
+    ctx.redirect('/login');
   }
 });
 
