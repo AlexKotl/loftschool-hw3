@@ -17,6 +17,10 @@ router.get('/', async (ctx) => {
 
 router.get('/login', async (ctx) => {
   try {
+    if (ctx.session.isAuth) {
+      ctx.redirect('/admin');
+    }
+    
     ctx.render('login');
   } catch (error) {
     console.error(error);
@@ -35,6 +39,10 @@ router.post('/login', async (ctx) => {
 
 router.get('/admin', async (ctx) => {
   try {
+    if (!ctx.session.isAuth) {
+      ctx.redirect('/login');
+    }
+
     const skills = await skillsCtrl.get();
     ctx.render('admin', {
       skills
@@ -47,6 +55,10 @@ router.get('/admin', async (ctx) => {
 
 router.post('/admin/skills', async (ctx) => {
   try {
+    if (!ctx.session.isAuth) {
+      ctx.redirect('/login');
+    }
+
     await skillsCtrl.set({ ...ctx.request.body });
     ctx.redirect('/admin');
   } catch (error) {
@@ -56,6 +68,10 @@ router.post('/admin/skills', async (ctx) => {
 
 router.post('/admin/upload', async (ctx) => {
   try {
+    if (!ctx.session.isAuth) {
+      ctx.redirect('/login');
+    }
+
     await productsCtrl.add({ ...ctx.request.body, ...ctx.request.files });
     ctx.redirect('/admin');
   } catch (error) {
