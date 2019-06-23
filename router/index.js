@@ -3,13 +3,25 @@ const router = new Router();
 const skillsCtrl = require('../controllers/skills');
 const productsCtrl = require('../controllers/products');
 const authCtrl = require('../controllers/auth');
+const contactsCtrl = require('../controllers/contacts');
 
 router.get('/', async (ctx) => {
   try {
     ctx.render('index', {
       skillsData: await skillsCtrl.get(),
-      products: await productsCtrl.get()
+      products: await productsCtrl.get(),
+      message: ctx.flash.get() ? ctx.flash.get().message : null
     });
+  } catch (error) {
+    console.error(error);
+  }
+});
+
+router.post('/', async (ctx) => {
+  try {
+    await contactsCtrl.send({...ctx.request.body});
+    ctx.flash.set({ message: 'Your message was sent' });
+    ctx.redirect('/');
   } catch (error) {
     console.error(error);
   }
@@ -36,7 +48,7 @@ router.post('/login', async (ctx) => {
     ctx.session.isAuth = true;
     ctx.redirect('/admin');
   } catch (error) {
-    ctx.flash.set({message: error.message });
+    ctx.flash.set({ message: error.message });
     ctx.redirect('/login');
   }
 });

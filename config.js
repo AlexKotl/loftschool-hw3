@@ -1,4 +1,5 @@
 exports.config = {
   login: 'admin',
-  password: 'admin'
+  password: 'admin',
+  adminEmail: 'support@admin.com'
 };
