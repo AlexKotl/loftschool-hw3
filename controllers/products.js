@@ -20,6 +20,7 @@ exports.get = () => new Promise((resolve, reject) => {
 exports.add = ({ photo, name, price }) => new Promise((resolve, reject) => {
   try {
     const photoDir = path.join('.', 'public', 'assets', 'img', 'products');
+    photo.name = + new Date() + ' ' + photo.name; // add timetstamp for unique filename
 
     if (!fs.existsSync(photoDir)) {
       console.log('creating upload dir');
