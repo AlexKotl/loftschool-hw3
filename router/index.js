@@ -5,9 +5,9 @@ const productsCtrl = require('../controllers/products')
 
 router.get('/', async (ctx) => {
   try {
-    const skills = await skillsCtrl.get();
     ctx.render('index', {
-      skillsData: skills
+      skillsData: await skillsCtrl.get(),
+      products: await productsCtrl.get()
     });
   } catch (error) {
     console.error(error);
