@@ -5,7 +5,10 @@ const productsCtrl = require('../controllers/products')
 
 router.get('/', async (ctx) => {
   try {
-    ctx.render('index');
+    const skills = await skillsCtrl.get();
+    ctx.render('index', {
+      skillsData: skills
+    });
   } catch (error) {
     console.error(error);
   }
