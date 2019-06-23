@@ -2,6 +2,7 @@ const Router = require('koa-router');
 const router = new Router();
 const skillsCtrl = require('../controllers/skills') 
 const productsCtrl = require('../controllers/products') 
+const authCtrl = require('../controllers/auth') ;
 
 router.get('/', async (ctx) => {
   try {
@@ -17,6 +18,16 @@ router.get('/', async (ctx) => {
 router.get('/login', async (ctx) => {
   try {
     ctx.render('login');
+  } catch (error) {
+    console.error(error);
+  }
+});
+
+router.post('/login', async (ctx) => {
+  try {
+    await authCtrl.auth(ctx.request.body.email, ctx.request.body.password);
+    ctx.session.isAuth = true;
+    ctx.redirect('/admin');
   } catch (error) {
     console.error(error);
   }

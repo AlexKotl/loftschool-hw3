@@ -13,6 +13,17 @@ const pug = new Pug({
 const static = require('koa-static');
 app.use(static('./public'));
 
+const session = require('koa-session');
+app.use(session({
+    key: 'koa:sess',
+    maxAge: 86400000,
+    overwrite: true,
+    httpOnly: true,
+    signed: false,
+    rolling: false,
+    renew: true
+}, app));
+
 const koaBody = require('koa-body');
 app.use(koaBody({
   formidable: {
