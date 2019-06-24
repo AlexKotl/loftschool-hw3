@@ -1,11 +1,7 @@
-const fs = require('fs');
-const path = require('path');
-const low = require('lowdb');
-const FileSync = require('lowdb/adapters/FileSync');
+const databaseUtil = require('../utils/database');
+const db = databaseUtil.loadDatabase('skills');
 
-const adapter = new FileSync(path.join(__dirname, '../database/skills.json'));
-const db = low(adapter);
-db.defaults({ skills: {} }); 
+db.defaults({ skills: {} });
 
 exports.get = () => new Promise((resolve, reject) => {
   try {
