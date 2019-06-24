@@ -16,7 +16,7 @@ exports.renderAdmin = async (ctx) => {
   } catch (error) {
     console.error(error);
   }
-}
+};
 
 exports.submitSkills = async (ctx) => {
   try {
@@ -30,7 +30,7 @@ exports.submitSkills = async (ctx) => {
   } catch (error) {
     console.error(error);
   }
-}
+};
 
 exports.submitProduct = async (ctx) => {
   try {
@@ -44,4 +44,4 @@ exports.submitProduct = async (ctx) => {
   } catch (error) {
     console.error(error);
   }
-}
+};

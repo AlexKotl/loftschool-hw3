@@ -23,7 +23,7 @@ exports.loginUser = async (ctx) => {
     ctx.flash.set({ message: error.message });
     ctx.redirect('/login');
   }
-}
+};
 
 exports.renderLoginForm = async (ctx) => {
   try {
@@ -38,4 +38,4 @@ exports.renderLoginForm = async (ctx) => {
   } catch (error) {
     console.error(error);
   }
-}
+};

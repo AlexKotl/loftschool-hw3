@@ -11,4 +11,4 @@ exports.renderHomepage = async (ctx) => {
   } catch (error) {
     console.error(error);
   }
-}
+};

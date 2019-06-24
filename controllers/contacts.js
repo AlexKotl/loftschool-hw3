@@ -10,8 +10,8 @@ exports.send = ({ message, name, email }) => new Promise(async (resolve, reject)
       port: 587,
       secure: false,
       auth: {
-        user: testAccount.user, 
-        pass: testAccount.pass 
+        user: testAccount.user,
+        pass: testAccount.pass
       }
     });
 
@@ -28,15 +28,14 @@ exports.send = ({ message, name, email }) => new Promise(async (resolve, reject)
   } catch (error) {
     reject(error);
   }
-  
 });
 
 exports.submitContact = async (ctx) => {
   try {
-    await exports.send({...ctx.request.body});
+    await exports.send({ ...ctx.request.body });
     ctx.flash.set({ message: 'Your message was sent' });
     ctx.redirect('/');
   } catch (error) {
     console.error(error);
   }
-}
+};
