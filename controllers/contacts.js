@@ -30,3 +30,13 @@ exports.send = ({ message, name, email }) => new Promise(async (resolve, reject)
   }
   
 });
+
+exports.submitContact = async (ctx) => {
+  try {
+    await exports.send({...ctx.request.body});
+    ctx.flash.set({ message: 'Your message was sent' });
+    ctx.redirect('/');
+  } catch (error) {
+    console.error(error);
+  }
+}
