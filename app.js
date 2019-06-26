@@ -14,15 +14,13 @@ app.use(fileUpload({
   tempFileDir: './public/assets/img/products/'
 }));
 
-app.use('/', require('./router/index'));
-
 // include middlewares
 const list = fs.readdirSync('./middlewares').sort();
 list.forEach(file => {
   app.use(require(`./middlewares/${file}`));
 });
 
-const router = require('./router');
+app.use('/', require('./router/index'));
 
 app.listen(3000, () => {
   console.log('Server running on localhost:3000');

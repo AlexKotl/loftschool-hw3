@@ -1,46 +1,46 @@
 const skillsCtrl = require('./skills');
 const productsCtrl = require('./products');
 
-exports.renderAdmin = async (ctx) => {
+exports.renderAdmin = async (req, res) => {
   try {
-    if (!ctx.session.isAuth) {
-      ctx.redirect('/login');
+    if (!req.session.isAuth) {
+      res.redirect('/login');
     }
 
     const skills = await skillsCtrl.get();
 
-    ctx.render('admin', {
+    res.render('admin', {
       skills,
-      message: ctx.flash.get() ? ctx.flash.get().message : null
+      message: req.flash('message') != '' ? req.flash('message') : null
     });
   } catch (error) {
     console.error(error);
   }
 };
 
-exports.submitSkills = async (ctx) => {
+exports.submitSkills = async (req, res) => {
   try {
-    if (!ctx.session.isAuth) {
-      ctx.redirect('/login');
+    if (!req.session.isAuth) {
+      res.redirect('/login');
     }
 
-    await skillsCtrl.set({ ...ctx.request.body });
-    ctx.flash.set({ message: 'Skills saved' });
-    ctx.redirect('/admin');
+    await skillsCtrl.set({ ...req.body });
+    req.flash('message', 'Skills saved');
+    res.redirect('/admin');
   } catch (error) {
     console.error(error);
   }
 };
 
-exports.submitProduct = async (ctx) => {
+exports.submitProduct = async (req, res) => {
   try {
-    if (!ctx.session.isAuth) {
-      ctx.redirect('/login');
+    if (!req.session.isAuth) {
+      res.redirect('/login');
     }
 
-    await productsCtrl.add({ ...ctx.request.body, ...ctx.request.files });
-    ctx.flash.set({ message2: 'New product added' });
-    ctx.redirect('/admin');
+    await productsCtrl.add({ ...req.body, ...req.files });
+    req.flash('message2', 'New product added');
+    res.redirect('/admin');
   } catch (error) {
     console.error(error);
   }

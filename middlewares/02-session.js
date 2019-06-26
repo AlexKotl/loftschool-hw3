@@ -7,4 +7,4 @@ module.exports = session({
   cookie: {
     expires: 600000
   }
-})
+});

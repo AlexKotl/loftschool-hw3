@@ -14,26 +14,26 @@ exports.auth = (login, password) => new Promise(async (resolve, reject) => {
   }
 });
 
-exports.loginUser = async (ctx) => {
+exports.loginUser = async (req, res) => {
   try {
-    await exports.auth(ctx.request.body.email, ctx.request.body.password);
-    ctx.session.isAuth = true;
-    ctx.redirect('/admin');
+    await exports.auth(req.body.email, req.body.password);
+    req.session.isAuth = true;
+    res.redirect('/admin');
   } catch (error) {
-    ctx.flash.set({ message: error.message });
-    ctx.redirect('/login');
+    req.flash('message', error.message);
+    res.redirect('/login');
   }
 };
 
-exports.renderLoginForm = async (ctx) => {
+exports.renderLoginForm = async (req, res) => {
   try {
-    if (ctx.session.isAuth) {
-      ctx.redirect('/admin');
+    if (req.session.isAuth) {
+      res.redirect('/admin');
     }
 
-    ctx.render('login', {
-      message: ctx.flash.get() ? ctx.flash.get().message : null,
-      message2: ctx.flash.get() ? ctx.flash.get().message2 : null
+    res.render('login', {
+      message: req.flash('message') != '' ? req.flash('message') : null,
+      message2: req.flash('message2') != '' ? req.flash('message2') : null
     });
   } catch (error) {
     console.error(error);
