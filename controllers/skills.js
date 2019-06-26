@@ -7,8 +7,7 @@ exports.get = () => new Promise((resolve, reject) => {
   try {
     const skills = db.get('skills').value();
     resolve(skills);
-  }
-  catch (err) {
+  } catch (err) {
     reject(err);
   }
 });
@@ -20,8 +19,7 @@ exports.set = ({age, concerts, cities, years}) => new Promise((resolve, reject) 
     db.set('skills', { age, concerts, cities, years }).write();
 
     resolve();
-  }
-  catch (err) {
+  } catch (err) {
     reject(err);
   }
 });

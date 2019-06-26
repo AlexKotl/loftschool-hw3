@@ -30,11 +30,11 @@ exports.send = ({ message, name, email }) => new Promise(async (resolve, reject)
   }
 });
 
-exports.submitContact = async (ctx) => {
+exports.submitContact = async (req, res) => {
   try {
-    await exports.send({ ...ctx.request.body });
-    ctx.flash.set({ message: 'Your message was sent' });
-    ctx.redirect('/');
+    await exports.send({ ...req.body });
+    req.flash('message', 'Your message was sent');
+    res.redirect('/');
   } catch (error) {
     console.error(error);
   }

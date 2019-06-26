@@ -1,16 +1,16 @@
 const fs = require('fs');
 const path = require('path');
 const databaseUtil = require('../utils/database');
-const db = databaseUtil.loadDatabase('skills');
+const db = databaseUtil.loadDatabase('products');
 
 db.defaults({ products: [] }).write();
 
 exports.get = () => new Promise((resolve, reject) => {
   try {
+    console.log('prodsss', db.get('products').value())
     const products = db.get('products').value();
     resolve(products);
-  }
-  catch (err) {
+  } catch (err) {
     reject(err);
   }
 });
@@ -29,8 +29,7 @@ exports.add = ({ photo, name, price }) => new Promise((resolve, reject) => {
 
     db.get('products').push({ name, price, filename: photo.name }).write();
     resolve();
-  }
-  catch (err) {
+  } catch (err) {
     reject(err);
   }
 });
