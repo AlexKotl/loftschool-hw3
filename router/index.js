@@ -1,5 +1,6 @@
-const Router = require('koa-router');
-const router = new Router();
+const express = require('express')
+const router = express.Router()
+
 const authCtrl = require('../controllers/auth');
 const adminCtrl = require('../controllers/admin');
 const contactsCtrl = require('../controllers/contacts');

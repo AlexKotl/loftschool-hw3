@@ -1,12 +1,12 @@
 const skillsCtrl = require('./skills');
 const productsCtrl = require('./products');
 
-exports.renderHomepage = async (ctx) => {
+exports.renderHomepage = async (req, res) => {
   try {
-    ctx.render('index', {
+    res.render('index', {
       skillsData: await skillsCtrl.get(),
       products: await productsCtrl.get(),
-      message: ctx.flash.get() ? ctx.flash.get().message : null
+      //message: req.flash.get() ? req.flash.get().message : null
     });
   } catch (error) {
     console.error(error);

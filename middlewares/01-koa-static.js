@@ -1,3 +1,3 @@
-const koaStatic = require('koa-static');
+const express = require('express');
 
-module.exports = koaStatic('./public');
+module.exports = express.static('./public');
