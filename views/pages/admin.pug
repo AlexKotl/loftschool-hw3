@@ -14,26 +14,26 @@ block content
         .form-container
           form.form-skill(action='/admin/skills' method="POST")
             .form-title Счетчики
-            if (message)
-              .status= message
-            label.form-skill__input-line 
+            if (messages.message)
+              .status= messages.message
+            label.form-skill__input-line
               span.form-skill__input-title Возраст
               input(name="age" type="number" value=`${skills.age}`).form-skill__input
-            label.form-skill__input-line 
+            label.form-skill__input-line
               span.form-skill__input-title Концертов
               input(name="concerts" type="number" value=`${skills.concerts}`).form-skill__input
-            label.form-skill__input-line 
+            label.form-skill__input-line
               span.form-skill__input-title Число городов
               input(name="cities" type="number" value=`${skills.cities}`).form-skill__input
-            label.form-skill__input-line 
+            label.form-skill__input-line
               span.form-skill__input-title Лет на сцене
               input(name="years" type="number" value=`${skills.years}`).form-skill__input
             .form__btns.form-skill__input-line
               button(type="submit").button Сохранить
           form.form-upload(action='/admin/upload' method="POST" enctype="multipart/form-data")
             .form-title Добавить товар
-            if (message2)
-              .status= message2
+            if (messages.message2)
+              .status= messages.message2
             .form-upload__input-line
               .form-upload__wraper
                 label.form-upload__label

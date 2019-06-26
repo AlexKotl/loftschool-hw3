@@ -11,7 +11,7 @@ exports.renderAdmin = async (req, res) => {
 
     res.render('admin', {
       skills,
-      message: req.flash('message') != '' ? req.flash('message') : null
+      //message: req.flash('message') != '' ? req.flash('message') : null
     });
   } catch (error) {
     console.error(error);
@@ -26,6 +26,7 @@ exports.submitSkills = async (req, res) => {
 
     await skillsCtrl.set({ ...req.body });
     req.flash('message', 'Skills saved');
+
     res.redirect('/admin');
   } catch (error) {
     console.error(error);

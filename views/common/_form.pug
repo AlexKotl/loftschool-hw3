@@ -1,7 +1,7 @@
 section.form
   .container
-    if (message)
-      .status= message
+    if (messages.message)
+      .status= messages.message
     .form__subtitle.subtitle Контактные данные
     h2.form__title.title Пишите, пообщаемся
     form(action="/" method="POST").form-email
@@ -16,4 +16,3 @@ section.form
         textarea(name="message").form-email__textarea
       .form-email__line
         button(type="submit").form-email__button.button Отправить
-    
